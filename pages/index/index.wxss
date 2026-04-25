@@ -26,44 +26,38 @@
 }
 
 /* 餐别选择区域 */
-.meal-selector {
-  margin-bottom: 24rpx;
+.meal-section {
+  margin-bottom: 32rpx;
 }
 
-/* 菜单选择区域 */
-.menu-selector {
-  margin-bottom: 24rpx;
-}
-
-/* 标签样式 */
-.label {
-  font-size: 28rpx;
-  font-weight: 500;
+.section-title {
+  font-size: 32rpx;
+  font-weight: 600;
   color: #333;
-  margin-bottom: 12rpx;
+  margin-bottom: 16rpx;
   display: block;
 }
 
-/* 餐别按钮容器 */
 .meal-buttons {
   display: flex;
   flex-wrap: wrap;
-  gap: 12rpx;
-  margin-bottom: 20rpx;
+  gap: 16rpx;
+  margin-bottom: 24rpx;
 }
 
-/* 餐别按钮 */
 .meal-btn {
-  padding: 16rpx 20rpx;
+  flex: 1 1 calc(25% - 12rpx);
+  min-width: 120rpx;
+  padding: 20rpx 12rpx;
   border-radius: 12rpx;
-  font-size: 26rpx;
-  background-color: white;
-  border: 1rpx solid #e0e0e0;
-  transition: all 0.3s ease;
-  flex: 1;
-  min-width: 100rpx;
+  font-size: 24rpx;
+  font-weight: 500;
   text-align: center;
+  background-color: white;
   color: #333;
+  border: 1rpx solid #e0e0e0;
+  outline: none;
+  transition: all 0.3s ease;
 }
 
 .meal-btn.active {
@@ -72,63 +66,73 @@
   border-color: #07c160;
 }
 
-/* 菜单列表 */
+/* 菜单选择区域 */
+.menu-section {
+  margin-bottom: 32rpx;
+}
+
 .menu-list {
   display: flex;
   flex-direction: column;
   gap: 16rpx;
-  margin-bottom: 24rpx;
 }
 
-/* 菜单项 */
 .menu-item {
   background-color: white;
   border-radius: 16rpx;
+  padding: 20rpx;
   box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.06);
-  overflow: hidden;
   transition: all 0.3s ease;
+  overflow: hidden;
 }
 
 /* 菜单头部 */
 .menu-header {
-  padding: 20rpx;
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.menu-header:active {
-  background-color: #f0f9f0;
+  margin-bottom: 16rpx;
 }
 
 .menu-name {
   font-size: 30rpx;
   font-weight: 500;
   color: #333;
-  flex: 1;
+}
+
+.menu-info {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
 }
 
 .dish-count {
   font-size: 24rpx;
   color: #666;
-  margin-right: 12rpx;
   background-color: #f5f5f5;
   padding: 4rpx 12rpx;
   border-radius: 12rpx;
 }
 
-.expand-icon {
-  font-size: 24rpx;
-  color: #666;
-  transition: all 0.3s ease;
+/* 下拉图标 */
+.dropdown-icon {
+  width: 24rpx;
+  height: 24rpx;
+  transition: transform 0.3s ease;
 }
 
-/* 菜单菜品列表 */
-.menu-dishes {
-  padding: 0 20rpx 20rpx;
-  background-color: #f8f8f8;
+/* 旋转动画 */
+.dropdown-icon.rotated {
+  transform: rotate(90deg);
+}
+
+/* 菜品列表 */
+.dish-list {
+  margin: 0 -20rpx 16rpx -20rpx;
+  padding: 0 20rpx 16rpx 20rpx;
+  border-top: 1rpx solid #f0f0f0;
+  padding-top: 16rpx;
   animation: slideDown 0.3s ease;
 }
 
@@ -143,110 +147,93 @@
   }
 }
 
-/* 菜单菜品项 */
-.menu-dish {
+.dish-item {
   padding: 12rpx 0;
+  border-bottom: 1rpx solid #f5f5f5;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1rpx solid #e0e0e0;
 }
 
-.menu-dish:last-child {
+.dish-item:last-child {
   border-bottom: none;
 }
 
-.menu-dish .dish-name {
-  font-size: 28rpx;
+.dish-name {
+  font-size: 26rpx;
   font-weight: 500;
   color: #333;
-  flex: 1;
 }
 
-.menu-dish .dish-price {
+.dish-price {
   font-size: 24rpx;
   color: #666;
 }
 
-.menu-dish .dish-unit {
+.dish-unit {
   font-size: 24rpx;
   color: #666;
 }
 
-/* 空菜品状态 */
-.empty-dishes {
-  text-align: center;
-  padding: 40rpx 0;
-  color: #999;
-  font-size: 24rpx;
-  background-color: #f8f8f8;
-  border-radius: 12rpx;
-  margin-top: 12rpx;
-}
-
-/* 使用菜单按钮 */
-.use-menu-btn {
-  width: 90%;
-  margin: 16rpx 5%;
-  padding: 18rpx;
-  border-radius: 12rpx;
-  font-size: 28rpx;
-  font-weight: 500;
+/* 使用按钮 */
+.use-btn {
   background-color: #07c160;
   color: white;
-  border: none;
-  outline: none;
-  text-align: center;
-}
-
-/* 随机选择按钮 */
-.action-btn {
-  padding: 22rpx;
   border-radius: 12rpx;
-  font-size: 30rpx;
+  padding: 20rpx;
+  font-size: 28rpx;
   font-weight: 500;
   text-align: center;
-  transition: all 0.3s ease;
   border: none;
   outline: none;
+  transition: all 0.3s ease;
   width: 100%;
   box-sizing: border-box;
-  margin-bottom: 20rpx;
-}
-
-.action-btn.primary {
-  background-color: #07c160;
-  color: white;
-}
-
-/* 无菜单提示 */
-.no-menu-tip {
-  text-align: center;
-  padding: 60rpx 0;
-  color: #999;
-  font-size: 28rpx;
-  background-color: white;
-  border-radius: 12rpx;
-  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.06);
-  margin: 20rpx 0;
 }
 
 /* 刷新按钮 */
-.refresh-btn {
+.refresh-container {
   position: fixed;
-  bottom: 100rpx;
-  right: 30rpx;
+  bottom: 32rpx;
+  right: 32rpx;
+  z-index: 999;
+}
+
+.refresh-btn {
   width: 80rpx;
   height: 80rpx;
   border-radius: 50%;
   background-color: #07c160;
   color: white;
+  border: none;
+  outline: none;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4rpx 16rpx rgba(7, 193, 96, 0.3);
-  z-index: 99;
+  box-shadow: 0 4rpx 12rpx rgba(7, 193, 96, 0.4);
   transition: all 0.3s ease;
-  border: none;
-  font-size: 36rpx;
+}
+
+.refresh-btn:active {
+  transform: scale(0.95);
+}
+
+.refresh-icon {
+  width: 40rpx;
+  height: 40rpx;
+  transition: transform 0.6s ease;
+}
+
+/* 旋转动画 */
+.refresh-icon.rotating {
+  animation: rotate 0.6s linear;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

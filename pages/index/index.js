@@ -1,15 +1,10 @@
 // index.js
 Page({
   data: {
-    mealTypes: ['早餐', '午餐', '晚餐', '加餐'],
     selectedMeal: '午餐',
     menus: [],
-    selectedMenuIndex: -1,
-    dishes: [],
-    selectedDishes: [],
-    totalPrice: 0,
-    showChooseDialog: false,
-    expandedMenuIndex: -1
+    expandedMenuIndex: -1,
+    isRefreshing: false
   },
 
   onLoad() {
@@ -25,18 +20,12 @@ Page({
     this.setData({ menus });
   },
 
-  refreshDishes() {
-    const menus = wx.getStorageSync('menus') || [];
-    this.setData({ menus });
-    wx.showToast({ title: '刷新成功', icon: 'success' });
-  },
-
   selectMeal(e) {
     const meal = e.currentTarget.dataset.meal;
     this.setData({ selectedMeal: meal });
   },
 
-  toggleMenuExpand(e) {
+  toggleMenu(e) {
     const index = e.currentTarget.dataset.index;
     this.setData({
       expandedMenuIndex: this.data.expandedMenuIndex === index ? -1 : index
@@ -45,18 +34,23 @@ Page({
 
   useMenu(e) {
     const index = e.currentTarget.dataset.index;
-    const menu = this.data.menus[index];
+    const selectedMeal = this.data.selectedMeal;
     
-    wx.showModal({
-      title: '确认使用',
-      content: `确定要使用"${menu.name}"菜单吗？`,
-      success: (res) => {
-        if (res.confirm) {
-          wx.navigateTo({
-            url: `/pages/select-dish/select-dish?index=${index}&meal=${this.data.selectedMeal}`
-          });
-        }
-      }
+    wx.navigateTo({
+      url: `/pages/select-dish/select-dish?index=${index}&meal=${selectedMeal}`
     });
+  },
+
+  handleRefresh() {
+    // 触发旋转动画
+    this.setData({ isRefreshing: true });
+    
+    // 加载菜单数据
+    this.loadMenus();
+    
+    // 动画结束后重置状态
+    setTimeout(() => {
+      this.setData({ isRefreshing: false });
+    }, 600);
   }
 });

@@ -1,0 +1,265 @@
+/* pages/export-history/export-history.wxss */
+/* 页面容器 */
+.container {
+  padding: 20rpx;
+  background-color: #f8f8f8;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* 标题区域 */
+.header {
+  text-align: center;
+  margin-bottom: 32rpx;
+}
+
+.header-title {
+  font-size: 40rpx;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8rpx;
+}
+
+.header-subtitle {
+  font-size: 28rpx;
+  color: #666;
+}
+
+/* 日期筛选 */
+.date-filter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: white;
+  border-radius: 12rpx;
+  padding: 16rpx 20rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.05);
+}
+
+.date-picker {
+  flex: 1;
+}
+
+.date-picker-content {
+  display: flex;
+  align-items: center;
+}
+
+.date-text {
+  font-size: 28rpx;
+  color: #333;
+  margin-right: 12rpx;
+}
+
+.date-icon {
+  font-size: 20rpx;
+  color: #999;
+}
+
+.date-actions {
+  flex-shrink: 0;
+  margin-left: 20rpx;
+}
+
+.clear-filter-btn {
+  padding: 8rpx 16rpx;
+  font-size: 24rpx;
+  background-color: #f5f5f5;
+  color: #666;
+  border: none;
+  border-radius: 8rpx;
+}
+
+/* 全选区域 */
+.select-all-bar {
+  background-color: white;
+  border-radius: 12rpx;
+  padding: 0;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+/* 勾选框样式 */
+.checkbox-item {
+  display: flex;
+  align-items: center;
+  padding: 24rpx;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.checkbox-item.active {
+  background: rgba(5, 193, 96, 0.08);
+}
+
+/* 勾选框 */
+.check-box {
+  width: 40rpx;
+  height: 40rpx;
+  border: 2rpx solid #999;
+  border-radius: 8rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20rpx;
+  transition: all 0.2s ease;
+  background-color: white;
+  flex-shrink: 0;
+}
+
+.check-box.checked {
+  background: #07c160;
+  border-color: #07c160;
+}
+
+.check-box text {
+  color: #fff;
+  font-size: 24rpx;
+  font-weight: bold;
+}
+
+.label {
+  font-size: 28rpx;
+  color: #333;
+  font-weight: 500;
+}
+
+/* 按年月分组的历史记录 */
+.history-grouped-list {
+  margin-bottom: 20rpx;
+}
+
+/* 月份分组 */
+.history-month-group {
+  background-color: white;
+  border-radius: 12rpx;
+  margin-bottom: 16rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+/* 月份头部 */
+.month-header {
+  display: flex;
+  align-items: center;
+  padding: 24rpx;
+  background-color: #f8f8f8;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.month-header:active {
+  background-color: #f0f0f0;
+}
+
+.month-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #333;
+  flex: 1;
+}
+
+.month-count {
+  font-size: 24rpx;
+  color: #999;
+  margin-right: 16rpx;
+}
+
+.expand-icon {
+  font-size: 20rpx;
+  color: #999;
+  transition: transform 0.3s ease;
+}
+
+.expand-icon.rotated {
+  transform: rotate(180deg);
+}
+
+/* 月内记录 */
+.month-records {
+  border-top: 1rpx solid #f0f0f0;
+}
+
+/* 历史记录项 */
+.history-record-item {
+  padding: 20rpx 24rpx;
+  border-bottom: 1rpx solid #f5f5f5;
+}
+
+.history-record-item:last-child {
+  border-bottom: none;
+}
+
+.record-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.record-meal {
+  font-size: 28rpx;
+  color: #333;
+  font-weight: 500;
+  margin-bottom: 6rpx;
+}
+
+.record-time {
+  font-size: 24rpx;
+  color: #666;
+  margin-bottom: 4rpx;
+}
+
+.record-count {
+  font-size: 22rpx;
+  color: #999;
+}
+
+.record-total {
+  flex-shrink: 0;
+  margin-left: 16rpx;
+}
+
+.total-price {
+  font-size: 26rpx;
+  color: #07c160;
+  font-weight: 500;
+}
+
+/* 导出按钮组 */
+.export-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+  margin-bottom: 20rpx;
+}
+
+.export-btn {
+  padding: 24rpx;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+  font-weight: 500;
+  text-align: center;
+  border: none;
+  outline: none;
+  background-color: #07c160;
+  color: white;
+}
+
+.export-btn.secondary {
+  background-color: white;
+  color: #07c160;
+  border: 1rpx solid #07c160;
+}
+
+/* 空状态 */
+.empty-history {
+  text-align: center;
+  padding: 100rpx 0;
+  color: #999;
+  font-size: 30rpx;
+  background-color: white;
+  border-radius: 16rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.08);
+}

@@ -7,45 +7,49 @@
   </view>
 
   <!-- 餐别选择区域 -->
-  <view class="meal-selector">
-    <text class="label">选择餐别</text>
+  <view class="meal-section">
+    <text class="section-title">选择餐别</text>
     <view class="meal-buttons">
-      <button wx:for="{{mealTypes}}" wx:key="index" bindtap="selectMeal" data-meal="{{item}}" class="meal-btn {{selectedMeal === item ? 'active' : ''}}">{{item}}</button>
+      <button bindtap="selectMeal" data-meal="早餐" class="meal-btn {{selectedMeal === '早餐' ? 'active' : ''}}">早餐</button>
+      <button bindtap="selectMeal" data-meal="午餐" class="meal-btn {{selectedMeal === '午餐' ? 'active' : ''}}">午餐</button>
+      <button bindtap="selectMeal" data-meal="晚餐" class="meal-btn {{selectedMeal === '晚餐' ? 'active' : ''}}">晚餐</button>
+      <button bindtap="selectMeal" data-meal="加餐" class="meal-btn {{selectedMeal === '加餐' ? 'active' : ''}}">加餐</button>
     </view>
   </view>
 
   <!-- 菜单选择区域 -->
-  <view class="menu-selector">
-    <text class="label">选择菜单</text>
+  <view class="menu-section">
+    <text class="section-title">选择菜单</text>
     <view class="menu-list">
       <view wx:for="{{menus}}" wx:key="index" class="menu-item">
-        <view class="menu-header" bindtap="toggleMenuExpand" data-index="{{index}}">
+        <!-- 菜单头部 -->
+        <view class="menu-header" bindtap="toggleMenu" data-index="{{index}}">
           <text class="menu-name">{{item.name}}</text>
-          <text class="dish-count">{{item.dishes ? item.dishes.length : 0}} 道菜品</text>
-          <text class="expand-icon">{{expandedMenuIndex === index ? '▼' : '▶'}}</text>
+          <view class="menu-info">
+            <text class="dish-count">{{item.dishes.length}} 道菜品</text>
+            <image src="/icon/icon-right.png" class="dropdown-icon {{expandedMenuIndex === index ? 'rotated' : ''}}"></image>
+          </view>
         </view>
         
-        <!-- 展开的菜品列表 -->
-        <view wx:if="{{expandedMenuIndex === index}}" class="menu-dishes">
-          <view wx:for="{{item.dishes}}" wx:key="dishIndex" class="menu-dish">
+        <!-- 菜品列表（默认隐藏） -->
+        <view wx:if="{{expandedMenuIndex === index}}" class="dish-list">
+          <view wx:for="{{item.dishes}}" wx:key="dishIndex" class="dish-item">
             <text class="dish-name">{{item.name}}</text>
             <text class="dish-price" wx:if="{{item.price}}">¥{{item.price}}/{{item.unit}}</text>
             <text class="dish-unit" wx:else>{{item.unit}}</text>
           </view>
-          <view wx:if="{{!item.dishes || item.dishes.length === 0}}" class="empty-dishes">
-            <text>暂无菜品</text>
-          </view>
         </view>
         
         <!-- 使用按钮 -->
-        <button bindtap="useMenu" data-index="{{index}}" class="use-menu-btn">使用此菜单</button>
-      </view>
-      <view wx:if="{{menus.length === 0}}" class="no-menu-tip">
-        <text>请先在我的菜单中创建菜单</text>
+        <button bindtap="useMenu" data-index="{{index}}" class="use-btn">使用此菜单</button>
       </view>
     </view>
   </view>
 
   <!-- 刷新按钮 -->
-  <button bindtap="refreshDishes" class="refresh-btn">↻</button>
+  <view class="refresh-container">
+    <button bindtap="handleRefresh" class="refresh-btn">
+      <image src="/icon/刷新.png" mode="aspectFit" class="refresh-icon {{isRefreshing ? 'rotating' : ''}}"></image>
+    </button>
+  </view>
 </view>

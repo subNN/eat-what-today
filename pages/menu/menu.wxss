@@ -42,11 +42,20 @@
   text-align: center;
   border: none;
   outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8rpx;
 }
 
 .action-btn.create {
   background-color: #07c160;
   color: white;
+}
+
+.create-icon {
+  width: 24rpx;
+  height: 24rpx;
 }
 
 .action-btn.import-export {

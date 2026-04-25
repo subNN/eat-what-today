@@ -11,9 +11,61 @@
     <!-- 导出选项 -->
     <view class="section-card">
       <text class="section-title">导出菜单</text>
+      
+      <!-- 下拉表单 -->
+      <view class="menu-dropdown">
+        <!-- 下拉表单头部 -->
+        <view class="dropdown-header" bindtap="toggleMenuSelection">
+          <text class="dropdown-title">{{selectedMenuName}}</text>
+          <image src="/icon/icon-right.png" class="dropdown-icon {{menuSelectionExpanded ? 'rotated' : ''}}"></image>
+        </view>
+        
+        <!-- 下拉菜单内容 -->
+        <view wx:if="{{menuSelectionExpanded}}" class="dropdown-content">
+          <!-- 全选选项 -->
+          <view 
+            class="checkbox-item {{allSelected ? 'active' : ''}}" 
+            bindtap="handleSelectAllClick"
+          >
+            <view class="check-box {{allSelected ? 'checked' : ''}}">
+              <text wx:if="{{allSelected}}">✔</text>
+            </view>
+            <text class="label">全选</text>
+          </view>
+          
+          <!-- 菜单列表 -->
+          <view class="checkbox-group">
+            <view 
+              wx:for="{{menuList}}"  
+              wx:key="index" 
+              class="checkbox-item {{item.checked ? 'active' : ''}}" 
+              bindtap="toggleMenuItem" 
+              data-index="{{index}}"
+            >
+              <view class="check-box {{item.checked ? 'checked' : ''}}">
+                <text wx:if="{{item.checked}}">✔</text>
+              </view>
+              <view class="menu-item-info">
+                <text class="menu-item-name">{{item.name}}</text>
+                <text class="menu-item-count">{{item.dishCount}}道菜品</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      
+      <!-- 导出按钮 -->
       <view class="button-group">
-        <button bindtap="exportToFile" class="action-btn">导出到文件</button>
-        <button bindtap="exportToClipboard" class="action-btn secondary">复制到剪切板</button>
+        <button 
+          bindtap="exportToFile" 
+          class="action-btn" 
+          disabled="{{selectedCount === 0}}"
+        >导出到文件</button>
+        <button 
+          bindtap="exportToClipboard" 
+          class="action-btn secondary" 
+          disabled="{{selectedCount === 0}}"
+        >复制到剪切板</button>
       </view>
     </view>
 

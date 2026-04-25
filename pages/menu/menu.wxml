@@ -8,7 +8,10 @@
 
   <!-- 操作按钮区域 -->
   <view class="action-bar">
-    <button bindtap="createMenu" class="action-btn create">+ 新建菜单</button>
+    <button bindtap="createMenu" class="action-btn create">
+      <image src="/icon/icon-新增.png" class="create-icon"></image>
+      <text>新建菜单</text>
+    </button>
     <button bindtap="goToImportExport" class="action-btn import-export">导入导出</button>
   </view>
 

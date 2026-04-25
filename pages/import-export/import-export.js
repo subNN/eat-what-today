@@ -1,6 +1,12 @@
 // pages/import-export/import-export.js
 Page({
   data: {
+    menus: [],
+    menuList: [],
+    allSelected: false,
+    menuSelectionExpanded: false,
+    selectedMenuName: '选择菜单',
+    selectedCount: 0,
     singleMenuExample: `{
   "name": "我的菜单",
   "dishes": [
@@ -27,15 +33,99 @@ Page({
 ]`
   },
 
+  onLoad() {
+    this.loadMenus();
+  },
+
+  loadMenus() {
+    const menus = wx.getStorageSync('menus') || [];
+    const menuList = menus.map(menu => ({
+      name: menu.name,
+      dishCount: menu.dishes.length,
+      checked: false,
+      originalIndex: menus.indexOf(menu)
+    }));
+    this.setData({ 
+      menus, 
+      menuList,
+      selectedMenus: [], 
+      allSelected: false,
+      menuSelectionExpanded: false,
+      selectedMenuName: '选择菜单',
+      selectedCount: 0
+    });
+  },
+
+  // 计算选中的菜单名称
+  updateSelectedMenuName() {
+    const { menuList, selectedCount, menus } = this.data;
+    let selectedMenuName;
+    
+    if (selectedCount === 0) {
+      selectedMenuName = '选择菜单';
+    } else if (selectedCount === menus.length) {
+      selectedMenuName = '全选';
+    } else if (selectedCount === 1) {
+      const selectedItem = menuList.find(item => item.checked);
+      selectedMenuName = selectedItem ? selectedItem.name : '选择菜单';
+    } else {
+      selectedMenuName = `已选择 ${selectedCount} 个菜单`;
+    }
+    
+    this.setData({ selectedMenuName });
+  },
+
+  // 切换菜单选择下拉
+  toggleMenuSelection() {
+    this.setData({ menuSelectionExpanded: !this.data.menuSelectionExpanded });
+  },
+
+  // 全选点击处理
+  handleSelectAllClick() {
+    const allSelected = !this.data.allSelected;
+    const menuList = this.data.menuList.map(item => ({
+      ...item,
+      checked: allSelected
+    }));
+    const selectedCount = allSelected ? menuList.length : 0;
+    this.setData({ menuList, allSelected, selectedCount });
+    this.updateSelectedMenuName();
+  },
+
+  // 单个菜单选择切换
+  toggleMenuItem(e) {
+    const index = e.currentTarget.dataset.index;
+    const menuList = [...this.data.menuList];
+    
+    // 切换选中状态
+    menuList[index].checked = !menuList[index].checked;
+    
+    // 计算选中的数量
+    const selectedCount = menuList.filter(item => item.checked).length;
+    
+    // 判断是否全选
+    const allSelected = selectedCount === menuList.length;
+    
+    this.setData({ menuList, allSelected, selectedCount });
+    this.updateSelectedMenuName();
+  },
+
+  // 获取选中的菜单
+  getSelectedMenus() {
+    const { menuList, menus } = this.data;
+    const selectedItems = menuList.filter(item => item.checked);
+    return selectedItems.map(item => menus[item.originalIndex]);
+  },
+
   // 导出到文件
   exportToFile() {
-    const menus = wx.getStorageSync('menus') || [];
-    if (menus.length === 0) {
-      wx.showToast({ title: '暂无菜单可导出', icon: 'none' });
+    const selectedMenus = this.getSelectedMenus();
+    if (selectedMenus.length === 0) {
+      wx.showToast({ title: '请选择要导出的菜单', icon: 'none' });
       return;
     }
 
-    const jsonStr = JSON.stringify(menus, null, 2);
+    const jsonStr = JSON.stringify(selectedMenus, null, 2);
     const fileName = `菜单导出_${this.getDateString()}.json`;
 
     // 保存到文件
@@ -47,19 +137,25 @@ Page({
       data: jsonStr,
       encoding: 'utf8',
       success: () => {
-        wx.showToast({ title: '导出成功', icon: 'success' });
-        // 打开文件
-        wx.openDocument({
-          filePath: filePath,
-          showMenu: true,
-          success: () => {
-            console.log('文件打开成功');
-          },
-          fail: (err) => {
-            console.error('打开文件失败', err);
-            wx.showToast({ title: '导出成功，请到文件管理查看', icon: 'none' });
-          }
+        wx.showToast({ 
+          title: '导出成功', 
+          icon: 'success',
+          duration: 2000
         });
+        // 延迟打开文件，确保toast有足够时间显示
+        setTimeout(() => {
+          wx.openDocument({
+            filePath: filePath,
+            showMenu: true,
+            success: () => {
+              console.log('文件打开成功');
+            },
+            fail: (err) => {
+              console.error('打开文件失败', err);
+              wx.showToast({ title: '导出成功，请到文件管理查看', icon: 'none' });
+            }
+          });
+        }, 1000);
       },
       fail: (err) => {
         console.error('写入文件失败', err);
@@ -70,13 +166,13 @@ Page({
 
   // 复制到剪切板
   exportToClipboard() {
-    const menus = wx.getStorageSync('menus') || [];
-    if (menus.length === 0) {
-      wx.showToast({ title: '暂无菜单可导出', icon: 'none' });
+    const selectedMenus = this.getSelectedMenus();
+    if (selectedMenus.length === 0) {
+      wx.showToast({ title: '请选择要导出的菜单', icon: 'none' });
       return;
     }
 
-    const jsonStr = JSON.stringify(menus, null, 2);
+    const jsonStr = JSON.stringify(selectedMenus, null, 2);
     wx.setClipboardData({
       data: jsonStr,
       success: () => {

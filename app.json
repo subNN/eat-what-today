@@ -5,7 +5,8 @@
     "pages/history/history",
     "pages/edit-menu/edit-menu",
     "pages/select-dish/select-dish",
-    "pages/import-export/import-export"
+    "pages/import-export/import-export",
+    "pages/export-history/export-history"
   ],
   "window": {
     "backgroundTextStyle": "light",

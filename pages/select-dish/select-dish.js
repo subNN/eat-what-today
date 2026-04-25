@@ -137,9 +137,9 @@ Page({
     };
 
     // 保存到历史记录
-    const historyMenus = wx.getStorageSync('historyMenus') || [];
-    historyMenus.unshift(menuRecord);
-    wx.setStorageSync('historyMenus', historyMenus);
+    const history = wx.getStorageSync('history') || [];
+    history.unshift(menuRecord);
+    wx.setStorageSync('history', history);
 
     wx.showToast({ title: '菜单保存成功', icon: 'success' });
     wx.navigateBack();
