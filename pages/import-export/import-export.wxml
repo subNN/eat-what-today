@@ -1,0 +1,56 @@
+<!--pages/import-export/import-export.wxml-->
+<view class="container">
+  <!-- 标题区域 -->
+  <view class="header">
+    <text class="header-title">导入导出</text>
+    <text class="header-subtitle">管理你的菜单数据</text>
+  </view>
+
+  <!-- 操作按钮区域 -->
+  <view class="action-section">
+    <!-- 导出选项 -->
+    <view class="section-card">
+      <text class="section-title">导出菜单</text>
+      <view class="button-group">
+        <button bindtap="exportToFile" class="action-btn">导出到文件</button>
+        <button bindtap="exportToClipboard" class="action-btn secondary">复制到剪切板</button>
+      </view>
+    </view>
+
+    <!-- 导入选项 -->
+    <view class="section-card">
+      <text class="section-title">导入菜单</text>
+      <view class="button-group">
+        <button bindtap="importFromFile" class="action-btn">从文件导入</button>
+        <button bindtap="importFromClipboard" class="action-btn secondary">从剪切板导入</button>
+      </view>
+    </view>
+  </view>
+
+  <!-- JSON格式示例 -->
+  <view class="format-example">
+    <view class="section-header">
+      <text class="section-title">支持的JSON格式示例</text>
+    </view>
+    <view class="json-example">
+      <text class="json-label">单个菜单格式：</text>
+      <view class="json-code">
+        <text>{{singleMenuExample}}</text>
+      </view>
+      
+      <text class="json-label">多个菜单格式：</text>
+      <view class="json-code">
+        <text>{{multipleMenuExample}}</text>
+      </view>
+      
+      <text class="json-label">说明：</text>
+      <view class="json-note">
+        <text>1. name: 菜单名称（必填）</text>
+        <text>2. dishes: 菜品数组</text>
+        <text>3. dish.name: 菜品名称（必填）</text>
+        <text>4. dish.price: 单价（可选，为null表示无单价）</text>
+        <text>5. dish.unit: 单位（必填）</text>
+      </view>
+    </view>
+  </view>
+</view>

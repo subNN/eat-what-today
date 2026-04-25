@@ -1,0 +1,44 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/menu/menu",
+    "pages/history/history",
+    "pages/edit-menu/edit-menu",
+    "pages/select-dish/select-dish",
+    "pages/import-export/import-export"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "今天吃什么",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#666",
+    "selectedColor": "#07c160",
+    "borderStyle": "black",
+    "backgroundColor": "#fff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "今天吃什么",
+        "iconPath": "icon/icon-首页.png",
+        "selectedIconPath": "icon/icon-首页.png"
+      },
+      {
+        "pagePath": "pages/menu/menu",
+        "text": "我的菜单",
+        "iconPath": "icon/icon-编辑.png",
+        "selectedIconPath": "icon/icon-编辑.png"
+      },
+      {
+        "pagePath": "pages/history/history",
+        "text": "选菜历史",
+        "iconPath": "icon/icon-分类管理.png",
+        "selectedIconPath": "icon/icon-分类管理.png"
+      }
+    ]
+  },
+  "lazyCodeLoading": "requiredComponents",
+  "sitemapLocation": "sitemap.json"
+}

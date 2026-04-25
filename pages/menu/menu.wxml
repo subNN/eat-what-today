@@ -1,0 +1,53 @@
+<!--menu.wxml-->
+<view class="container">
+  <!-- 标题区域 -->
+  <view class="header">
+    <text class="header-title">我的菜单</text>
+    <text class="header-subtitle">管理你的专属菜单</text>
+  </view>
+
+  <!-- 操作按钮区域 -->
+  <view class="action-bar">
+    <button bindtap="createMenu" class="action-btn create">+ 新建菜单</button>
+    <button bindtap="goToImportExport" class="action-btn import-export">导入导出</button>
+  </view>
+
+  <!-- 批量操作区域 -->
+  <view wx:if="{{isEditMode}}" class="batch-actions">
+    <button bindtap="clearAllMenus" class="batch-btn delete">清空菜单</button>
+  </view>
+
+  <!-- 菜单管理 -->
+  <view class="menu-management">
+    <view class="menu-header">
+      <text class="menu-title">菜单列表</text>
+      <button bindtap="clearAllMenus" class="clear-btn">
+        <image src="/icon/icon-删除.png" class="clear-icon"></image>
+        <text class="clear-text">清空菜单</text>
+      </button>
+    </view>
+
+    <view class="menu-list">
+      <view wx:for="{{menus}}" wx:key="index" class="menu-item {{selectedMenus.indexOf(index) > -1 ? 'selected' : ''}} {{selectedMenuIndex === index ? 'current' : ''}}" bindtap="toggleSelectMenu" data-index="{{index}}">
+        <!-- 选择框 -->
+        <view wx:if="{{isEditMode}}" class="checkbox {{selectedMenus.indexOf(index) > -1 ? 'checked' : ''}}">
+          <text wx:if="{{selectedMenus.indexOf(index) > -1}}">✓</text>
+        </view>
+
+        <view class="menu-content" bindtap="selectMenu" data-index="{{index}}">
+          <text class="menu-name">{{item.name}}</text>
+          <text class="dish-count">{{item.dishes.length}} 道菜品</text>
+        </view>
+
+        <view wx:if="{{!isEditMode}}" class="menu-actions">
+          <button bindtap="editMenu" data-index="{{index}}" class="edit-btn">编辑</button>
+          <button bindtap="deleteMenu" data-index="{{index}}" class="delete-btn">删除</button>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{menus.length === 0}}" class="no-menu-selected">
+    <text>请选择或创建一个菜单</text>
+  </view>
+</view>

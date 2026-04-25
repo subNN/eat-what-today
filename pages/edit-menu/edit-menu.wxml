@@ -1,0 +1,59 @@
+<!--pages/edit-menu/edit-menu.wxml-->
+<view class="container">
+  <!-- 菜单名称编辑 -->
+  <view class="menu-name-section">
+    <text class="label">菜单名称</text>
+    <input placeholder="请输入菜单名称" value="{{menuName}}" bindinput="bindMenuName" class="input"/>
+  </view>
+
+  <!-- 菜品管理 -->
+  <view class="dish-management">
+    <view class="section-header">
+      <text class="section-title">菜品管理</text>
+      <text class="dish-count">{{dishes.length}} 道菜品</text>
+    </view>
+
+    <!-- 添加菜品表单 -->
+    <view class="add-dish-form">
+      <input placeholder="菜品名称" bindinput="bindDishName" value="{{dishName}}" class="input"/>
+      <input placeholder="单价（可选）" bindinput="bindDishPrice" value="{{dishPrice}}" type="number" class="input"/>
+      
+      <!-- 单位选择 -->
+      <view class="unit-selector">
+        <text class="label">单位</text>
+        <view class="selector-container">
+          <picker bindchange="bindUnitChange" value="{{unitIndex}}" range="{{unitOptions}}">
+            <view class="picker">
+              {{unitOptions[unitIndex]}}
+            </view>
+          </picker>
+        </view>
+        
+        <!-- 自定义单位输入框 -->
+        <input wx:if="{{unitOptions[unitIndex] === '自定义'}}" placeholder="请输入自定义单位" bindinput="bindCustomUnit" value="{{customUnit}}" class="input"/>
+      </view>
+      
+      <button bindtap="addDish" class="add-btn">添加菜品</button>
+    </view>
+
+    <!-- 菜品列表 -->
+    <view class="dish-list">
+      <view wx:for="{{dishes}}" wx:key="index" class="dish-item">
+        <view class="dish-info">
+          <text class="dish-name">{{item.name}}</text>
+          <text class="dish-price" wx:if="{{item.price}}">¥{{item.price}}/{{item.unit}}</text>
+          <text class="dish-unit" wx:else>{{item.unit}}</text>
+        </view>
+        <button bindtap="deleteDish" data-index="{{index}}" class="delete-btn">×</button>
+      </view>
+      <view wx:if="{{dishes.length === 0}}" class="empty-dishes">
+        <text>暂无菜品，点击上方添加</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 操作按钮 -->
+  <view class="action-buttons">
+    <button bindtap="saveMenu" class="action-btn primary">保存菜单</button>
+  </view>
+</view>

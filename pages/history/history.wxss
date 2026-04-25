@@ -1,0 +1,244 @@
+/* history.wxss */
+/* 页面容器 */
+.container {
+  padding: 20rpx;
+  background-color: #f8f8f8;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* 标题区域 */
+.header {
+  text-align: center;
+  margin-bottom: 32rpx;
+}
+
+.header-title {
+  font-size: 40rpx;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8rpx;
+}
+
+.header-subtitle {
+  font-size: 28rpx;
+  color: #666;
+}
+
+/* 操作按钮区域 */
+.action-bar {
+  display: flex;
+  flex-direction: row;
+  gap: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.action-btn {
+  flex: 1;
+  padding: 20rpx;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+  font-weight: 500;
+  text-align: center;
+  border: none;
+  outline: none;
+}
+
+.action-btn.refresh {
+  background-color: #07c160;
+  color: white;
+}
+
+.action-btn.edit {
+  background-color: #f5f5f5;
+  color: #333;
+  border: 1rpx solid #e0e0e0;
+}
+
+/* 批量操作区域 */
+.batch-actions {
+  display: flex;
+  flex-direction: row;
+  gap: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.batch-btn {
+  flex: 1;
+  padding: 18rpx;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+  font-weight: 500;
+  text-align: center;
+  border: none;
+  outline: none;
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+.batch-btn.delete {
+  background-color: #ff4d4f;
+  color: white;
+}
+
+/* 历史菜单列表 */
+.history-list {
+  margin-bottom: 20rpx;
+}
+
+/* 历史菜单项 */
+.history-item {
+  background-color: white;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: flex-start;
+  border: 3rpx solid transparent;
+  position: relative;
+}
+
+/* 选中状态 - 红色边框和背景 */
+.history-item.selected {
+  background-color: #fff2f0;
+  border: 3rpx solid #ff4d4f;
+}
+
+/* 选中标记 - 红色圆圈 */
+.selected-mark {
+  width: 40rpx;
+  height: 40rpx;
+  background-color: #ff4d4f;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 24rpx;
+  font-weight: bold;
+  margin-right: 16rpx;
+  flex-shrink: 0;
+}
+
+.history-content {
+  flex: 1;
+}
+
+/* 历史菜单头部 */
+.history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16rpx;
+  padding-bottom: 12rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.history-time {
+  font-size: 24rpx;
+  color: #666;
+  flex: 1;
+}
+
+.history-meal {
+  font-size: 26rpx;
+  font-weight: 500;
+  color: #07c160;
+  background-color: rgba(7, 193, 96, 0.1);
+  padding: 4rpx 12rpx;
+  border-radius: 12rpx;
+}
+
+/* 历史菜品列表 */
+.history-dishes {
+  margin-bottom: 16rpx;
+}
+
+/* 历史菜品项 */
+.history-dish {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10rpx;
+  font-size: 26rpx;
+  padding: 6rpx 0;
+}
+
+.history-dish:last-child {
+  margin-bottom: 0;
+}
+
+.dish-name {
+  flex: 1;
+  color: #333;
+  font-weight: 500;
+}
+
+.dish-price {
+  color: #666;
+  font-size: 24rpx;
+}
+
+/* 历史菜单总价 */
+.history-total {
+  text-align: right;
+  font-size: 28rpx;
+  font-weight: 600;
+  padding-top: 12rpx;
+  border-top: 1rpx solid #f0f0f0;
+  color: #333;
+}
+
+/* 空状态 */
+.empty {
+  text-align: center;
+  padding: 60rpx 0;
+  color: #999;
+  font-size: 30rpx;
+  background-color: white;
+  border-radius: 20rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.06);
+  margin: 40rpx 0;
+}
+
+/* 刷新按钮 */
+.refresh-btn {
+  position: fixed;
+  bottom: 100rpx;
+  right: 30rpx;
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  background-color: #07c160;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4rpx 16rpx rgba(7, 193, 96, 0.3);
+  z-index: 99;
+  border: none;
+  font-size: 36rpx;
+}
+
+/* 单独删除按钮 */
+.single-delete-btn {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32rpx;
+  padding: 0;
+  background-color: #f5f5f5;
+  color: #999;
+  border: none;
+  flex-shrink: 0;
+  margin-left: 16rpx;
+}
+
+.single-delete-btn:active {
+  background-color: #ff4d4f;
+  color: white;
+}
